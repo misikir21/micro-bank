@@ -113,3 +113,4 @@ movements.forEach(function (mov,i,arr)
 //the at method works both on array and string
 
 // console.log(arr.at(-1))
+
