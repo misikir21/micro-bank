@@ -146,3 +146,13 @@ const createusername=function (accs){
 }
 createusername(accounts);
 console.log(accounts)
+
+//THE FILETR METHOD
+const despost=movements.filter(function(mov){
+  return mov>0
+})
+
+const depositfor=[];
+for(const mov of movements) if (mov >0)depositfor.push(mov)
+console.log(despost)
+console.log(depositfor)
