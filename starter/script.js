@@ -131,6 +131,13 @@ containerMovements.insertAdjacentHTML('afterbegin',html)
 };
 displayMovents(account1.movements)
 
+//display the balance
+const calanddisplaybalance=function (movements){
+  const balance=movements.reduce((acc,mov)=>acc +mov,0)
+  labelBalance.textContent=`${balance} EUR`
+  }
+calanddisplaybalance(account2.movements)
+
 
 ///////////////////////////////////////////////////////
 //generate user names from owners data
@@ -159,7 +166,5 @@ console.log(depositfor)*/
 
 
 //the reduce mehtod
-const balance=movements.reduce(function(acc,cur,i){
-  return acc +cur;
-},0)
-console.log(balance)
+// const balance=movements.reduce((acc,cur,i)=>acc +cur,0)
+// console.log(balance)
