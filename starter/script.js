@@ -130,3 +130,19 @@ containerMovements.insertAdjacentHTML('afterbegin',html)
 });     
 };
 displayMovents(account1.movements)
+
+
+///////////////////////////////////////////////////////
+//generate user names from owners data
+
+const createusername=function (accs){
+  accs.forEach(function(acc){
+    acc.username=acc.owner
+    .toLowerCase()
+    .split(' ')
+    .map(name=>name[0])
+    .join('')
+  })
+}
+createusername(accounts);
+console.log(accounts)
