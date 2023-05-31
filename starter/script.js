@@ -148,11 +148,18 @@ createusername(accounts);
 console.log(accounts)
 
 //THE FILETR METHOD
-const despost=movements.filter(function(mov){
+/*const despost=movements.filter(function(mov){
   return mov>0
 })
 
 const depositfor=[];
 for(const mov of movements) if (mov >0)depositfor.push(mov)
 console.log(despost)
-console.log(depositfor)
+console.log(depositfor)*/
+
+
+//the reduce mehtod
+const balance=movements.reduce(function(acc,cur,i){
+  return acc +cur;
+},0)
+console.log(balance)
