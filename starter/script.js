@@ -129,14 +129,34 @@ const displayMovents=function (movements) {
 containerMovements.insertAdjacentHTML('afterbegin',html)
 });     
 };
-displayMovents(account1.movements)
 
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = acc.movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = acc.movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * acc.interestRate) / 100)
+    .filter((int, i, arr) => {
+      // console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
 //display the balance
 const calanddisplaybalance=function (movements){
   const balance=movements.reduce((acc,mov)=>acc +mov,0)
   labelBalance.textContent=`${balance} EUR`
   }
-calanddisplaybalance(account2.movements)
+
 
 //return the of the depoists
 const max=movements.reduce((acc,mov)=> acc >mov?acc:mov,movements[0]);
@@ -157,6 +177,34 @@ const createusername=function (accs){
 }
 createusername(accounts);
 console.log(accounts)
+let curacc;
+btnLogin.addEventListener('click',function(e){
+  e.preventDefault()
+  curacc=accounts.find(
+    acc=>acc.username===inputLoginUsername.value
+  );
+  console.log(curacc)
+  if(curacc?.pin===Number(inputLoginPin.value)){
+    labelWelcome.textContent=`welcome back,${curacc.owner.split(' ')[0]}`;
+    containerApp.style.opacity=100;
+    //clear the input feilds
+    inputLoginUsername.value=inputLoginPin.value='';
+    inputLoginPin.blur()
+  }
+  //dsiplay movs
+  displayMovents(curacc.movements)
+
+
+  //dsiplay balance
+  calanddisplaybalance(curacc.movements)
+
+
+ //dispaly summary
+
+
+  calcDisplaySummary(curacc)
+})
+
 
 //THE FILETR METHOD
 /*const despost=movements.filter(function(mov){
