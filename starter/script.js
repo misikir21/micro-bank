@@ -152,9 +152,9 @@ const calcDisplaySummary = function (acc) {
   labelSumInterest.textContent = `${interest}€`;
 };
 //display the balance
-const calanddisplaybalance=function (movements){
-  const balance=movements.reduce((acc,mov)=>acc +mov,0)
-  labelBalance.textContent=`${balance} EUR`
+const calanddisplaybalance=function (acc){
+  acc.balance=acc.movements.reduce((acc,mov)=>acc +mov,0)
+  labelBalance.textContent=`${acc.balance} EUR`
   }
 
 
@@ -196,7 +196,7 @@ btnLogin.addEventListener('click',function(e){
 
 
   //dsiplay balance
-  calanddisplaybalance(curacc.movements)
+  calanddisplaybalance(curacc)
 
 
  //dispaly summary
@@ -205,6 +205,21 @@ btnLogin.addEventListener('click',function(e){
   calcDisplaySummary(curacc)
 })
 
+btnTransfer.addEventListener('click',function(e){
+  e.preventDefault();
+  const amount=Number(inputTransferAmount.value);
+  const receiverAcc=accounts.find(acc=>acc.username===inputTransferTo.value);
+  console.log(amount,receiverAcc)
+  if(amount > 0 &&
+    receiverAcc&&
+    curacc.balance > amount&&
+    receiverAcc?.username!==curacc.username
+    ){
+      //do the transaction
+      curacc.movements.push(-amount)
+      receiverAcc.movements.push(amount)
+    }
+})
 
 //THE FILETR METHOD
 /*const despost=movements.filter(function(mov){
