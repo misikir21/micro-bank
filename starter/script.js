@@ -138,6 +138,10 @@ const calanddisplaybalance=function (movements){
   }
 calanddisplaybalance(account2.movements)
 
+//return the of the depoists
+const max=movements.reduce((acc,mov)=> acc >mov?acc:mov,movements[0]);
+console.log(max)
+
 
 ///////////////////////////////////////////////////////
 //generate user names from owners data
@@ -168,3 +172,8 @@ console.log(depositfor)*/
 //the reduce mehtod
 // const balance=movements.reduce((acc,cur,i)=>acc +cur,0)
 // console.log(balance)
+
+
+//the find method doesn't return an arrya it only returns an element
+const accowener=accounts.find(acc => acc.owner===('Jessica Davis'))
+console.log(accowener);
