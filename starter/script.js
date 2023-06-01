@@ -175,6 +175,19 @@ const createusername=function (accs){
     .join('')
   })
 }
+const updateui=function(accs){
+  displayMovents(accs.movements)
+
+
+  //dsiplay balance
+  calanddisplaybalance(accs)
+
+
+ //dispaly summary
+
+
+  calcDisplaySummary(accs)
+}
 createusername(accounts);
 console.log(accounts)
 let curacc;
@@ -192,17 +205,7 @@ btnLogin.addEventListener('click',function(e){
     inputLoginPin.blur()
   }
   //dsiplay movs
-  displayMovents(curacc.movements)
-
-
-  //dsiplay balance
-  calanddisplaybalance(curacc)
-
-
- //dispaly summary
-
-
-  calcDisplaySummary(curacc)
+  updateui(curacc)
 })
 
 btnTransfer.addEventListener('click',function(e){
@@ -210,6 +213,7 @@ btnTransfer.addEventListener('click',function(e){
   const amount=Number(inputTransferAmount.value);
   const receiverAcc=accounts.find(acc=>acc.username===inputTransferTo.value);
   console.log(amount,receiverAcc)
+  inputTransferAmount.value=inputTransferTo.value='';
   if(amount > 0 &&
     receiverAcc&&
     curacc.balance > amount&&
@@ -218,6 +222,7 @@ btnTransfer.addEventListener('click',function(e){
       //do the transaction
       curacc.movements.push(-amount)
       receiverAcc.movements.push(amount)
+      updateui(curacc)
     }
 })
 
