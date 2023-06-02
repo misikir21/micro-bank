@@ -226,6 +226,16 @@ btnTransfer.addEventListener('click',function(e){
     }
 })
 
+btnLoan.addEventListener('click',function(e){
+  e.preventDefault();
+  const amount=Number(inputLoanAmount.value)
+
+if(amount > 0 &&curacc.movements.some(mov=>mov >= amount *0.1)){
+  curacc.movements.push(amount);
+  updateui(curacc);
+  inputLoanAmount.value=''
+}
+});
 //THE FILETR METHOD
 /*const despost=movements.filter(function(mov){
   return mov>0
@@ -245,3 +255,6 @@ console.log(depositfor)*/
 //the find method doesn't return an arrya it only returns an element
 const accowener=accounts.find(acc => acc.owner===('Jessica Davis'))
 console.log(accowener);
+
+const someval=movements.every(mov=>mov > 150);
+console.log(someval)
