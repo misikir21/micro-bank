@@ -114,9 +114,11 @@ movements.forEach(function (mov,i,arr)
 
 // console.log(arr.at(-1))
 
-const displayMovents=function (movements) {
+const displayMovents=function (movements,sort=false) {
+
   containerMovements.innerHTML='';
-  movements.forEach(function (mov,i) {
+  const movs=sort?movements.slice().sort((a,b)=>a-b):movements;
+  movs.forEach(function (mov,i) {
     const type=mov > 0?'deposit':'withdrawal';
   
   const html=`
@@ -236,6 +238,13 @@ if(amount > 0 &&curacc.movements.some(mov=>mov >= amount *0.1)){
   inputLoanAmount.value=''
 }
 });
+
+let sorted=false;
+btnSort.addEventListener('click',function(e){
+  e.preventDefault()
+  displayMovents(curacc.movements,!sorted);
+  sorted=!sorted;
+});
 //THE FILETR METHOD
 /*const despost=movements.filter(function(mov){
   return mov>0
@@ -258,3 +267,25 @@ console.log(accowener);
 
 const someval=movements.every(mov=>mov > 150);
 console.log(someval)
+console.log(account4.movements.every(mov=> mov >49 ))
+
+//return < 0,a,b(keep order)
+//return >0,b,a(swithe order)
+
+//ascending 
+// movements.sort((a,b)=>{
+//   if(a>b) return 1;
+//   if(a<b) return -1;
+// });
+//we can refactor the above code to
+movements.sort((a,b)=>a -b);
+console.log(movements)
+//ace
+
+// movements.sort((a,b)=>{
+//   if(a>b) return -1;
+//   if(a<b) return 1;
+// 
+movements.sort((a,b)=>b-a);
+console.log(movements)
+//dec
